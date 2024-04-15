@@ -18,4 +18,4 @@ const tweetSchema = new Schema(
 );
 
 tweetSchema.plugin(mongooseAggregatePaginate);
-export const Comment = mongoose.model('Comment', tweetSchema);
+export const Tweet = mongoose.model('Tweet', tweetSchema);
