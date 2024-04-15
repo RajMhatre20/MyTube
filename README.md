@@ -25,12 +25,8 @@ Ensure you replace placeholders with appropriate values.
 
 ### Running the Project
 
-Make sure you have all dependencies installed using command npm install and the MongoDB instance is running. Once you have set up the environment variables in the `.env` file, you can run the project using npm run dev.
+Make sure you have all dependencies installed using the command `npm install`, and that the MongoDB instance is running. Once you have set up the environment variables in the `.env` file, you can run the project using `npm run dev`.
 
 ## Contributing
 
 Contributions are welcome! If you find any issues or have suggestions for improvement, feel free to open an issue or submit a pull request.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
