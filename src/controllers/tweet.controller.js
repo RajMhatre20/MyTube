@@ -1,4 +1,5 @@
 import { Tweet } from '../models/tweet.model.js';
+import { User } from '../models/user.model.js';
 import { ApiError } from '../utils/ApiError.js';
 import { ApiResponse } from '../utils/ApiResponse.js';
 import { asyncHandler } from '../utils/asyncHandler.js';
@@ -31,7 +32,14 @@ const createTweet = asyncHandler(async (req, res) => {
 });
 
 const getUserTweets = asyncHandler(async (req, res) => {
-    const user = req.user;
+    const { username } = req.params;
+
+    if (!username?.trim()) {
+        throw new ApiError(400, 'Username is missing');
+    }
+
+    const user = await User.findOne({ username: username });
+
     if (!user) {
         throw new ApiError(404, 'User does not exist');
     }
@@ -47,9 +55,14 @@ const getUserTweets = asyncHandler(async (req, res) => {
 
 const updateTweet = asyncHandler(async (req, res) => {
     try {
-        const { tweetId, content } = req.body;
-        if (!tweetId || !content) {
-            throw new ApiError(401, 'TweetId or content not found');
+        const { content } = req.body;
+        const { tweetId } = req.params;
+        if (!tweetId) {
+            throw new ApiError(401, 'TweetId not found');
+        }
+
+        if (!content) {
+            throw new ApiError(401, 'content not found');
         }
 
         const tweet = await Tweet.findById({ _id: tweetId });
@@ -79,14 +92,14 @@ const updateTweet = asyncHandler(async (req, res) => {
     } catch (error) {
         throw new ApiError(
             500,
-            'Something went wrong while upadting the tweet'
+            'Something went wrong while updating the tweet'
         );
     }
 });
 
 const deleteTweet = asyncHandler(async (req, res) => {
     try {
-        const { tweetId } = req.body;
+        const { tweetId } = req.params;
         if (!tweetId) {
             throw new ApiError(401, 'TweetId not found');
         }
