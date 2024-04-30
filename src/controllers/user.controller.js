@@ -239,10 +239,9 @@ const getCurrentUser = asyncHandler((req, res) => {
 
 const updateAccountDetails = asyncHandler(async (req, res) => {
     const { fullName, email } = req.body;
-    console.log(req.body);
 
     if (!(fullName || email)) {
-        return new ApiError(400, 'All fields are required');
+        return new ApiError(400, 'Atleast one field is required');
     }
 
     const user = await User.findByIdAndUpdate(
