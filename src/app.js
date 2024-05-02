@@ -15,10 +15,12 @@ import userRouter from './routes/user.route.js';
 import tweetRouter from './routes/tweet.route.js';
 import videoRouter from './routes/video.route.js';
 import commentRouter from './routes/comment.route.js';
+import likeRouter from './routes/like.route.js';
 
 //Routes declaration
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/tweets', tweetRouter);
 app.use('/api/v1/videos', videoRouter);
 app.use('/api/v1/comments', commentRouter);
+app.use('/api/v1/likes', likeRouter);
 export default app;
